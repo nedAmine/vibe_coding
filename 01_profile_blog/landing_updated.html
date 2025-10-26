@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hmidi Amine - Frontend Developer</title>
+    <meta name="description" content="Industrial IT Engineer & Frontend Developer passionate about creating innovative solutions. Ready to join international IT companies.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /*font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;*/
+            font-family: "Delius", cursive;
+            background: linear-gradient(135deg, hsl(220, 25%, 12%), hsl(240, 48%, 20%));
+            color: hsl(210, 40%, 98%);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Animated Background Elements */
+        .bg-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-orb-1 {
+            top: 10%;
+            left: 5%;
+            width: 400px;
+            height: 400px;
+            background: hsl(195, 92%, 58%);
+            animation: glow-pulse 8s ease-in-out infinite;
+        }
+
+        .bg-orb-2 {
+            bottom: 10%;
+            right: 5%;
+            width: 500px;
+            height: 500px;
+            background: hsl(240, 48%, 48%);
+            animation: glow-pulse 8s ease-in-out infinite 1s;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.15; }
+            50% { transform: scale(1.1); opacity: 0.25; }
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            padding: 1rem 0;
+            animation: fade-in 1s ease-out;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, hsl(195, 92%, 58%), hsl(240, 48%, 48%));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            margin-bottom: 0;
+        }
+
+        .hero .subtitle {
+            font-size: 16px;
+            color: hsl(210deg 18.52% 89.55%);
+            font-weight: 300;
+            padding-left: 1vh;
+        }
+
+        .hero-button {
+            flex-shrink: 0;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, hsl(195, 92%, 58%), hsl(49.85deg 79.84% 31.61%));
+            color: hsl(220, 25%, 12%);
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 1rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 30px hsl(195, 92%, 58%, 0.3), 0 10px 25px -5px hsl(0, 0%, 0%, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px hsl(195, 92%, 58%, 0.5), 0 15px 30px -5px hsl(0, 0%, 0%, 0.4);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+            animation: slide-up 1s ease-out 0.2s both;
+        }
+
+        .card {
+            background: linear-gradient(145deg, hsl(220, 20%, 18%), hsl(220, 20%, 14%));
+            border: 1px solid hsl(220, 15%, 25%);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px -10px hsl(0, 0%, 0%, 0.5);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px hsl(195, 92%, 58%, 0.2);
+        }
+
+        .card h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: hsl(195, 92%, 58%);
+        }
+
+        .card p {
+            color: hsl(210, 20%, 70%);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            color: hsl(195, 92%, 58%);
+            font-weight: 600;
+        }
+
+        /* Skills Section */
+        .skills-section {
+            background: linear-gradient(145deg, hsl(220, 20%, 18%), hsl(220, 20%, 14%));
+            border: 1px solid hsl(220, 15%, 25%);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            box-shadow: 0 10px 40px -10px hsl(0, 0%, 0%, 0.5);
+            animation: slide-up 1s ease-out 0.4s both;
+        }
+
+        .skills-section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 2rem;
+            color: hsl(195, 92%, 58%);
+            text-align: center;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .skill-tag {
+            background: hsl(220, 15%, 25%, 0.5);
+            border: 1px solid hsl(195, 92%, 58%, 0.3);
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .skill-tag:hover {
+            background: hsl(195, 92%, 58%, 0.2);
+            border-color: hsl(195, 92%, 58%, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Passions Section */
+        .passions-section {
+            margin: 3rem 0;
+            animation: slide-up 1s ease-out 0.6s both;
+        }
+
+        .passions-section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 2rem;
+            color: hsl(195, 92%, 58%);
+            text-align: center;
+        }
+
+        .passions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .passion-card {
+            background: linear-gradient(145deg, hsl(220, 20%, 18%), hsl(220, 20%, 14%));
+            border: 1px solid hsl(220, 15%, 25%);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 40px -10px hsl(0, 0%, 0%, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .passion-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 30px hsl(195, 92%, 58%, 0.2);
+        }
+
+        .passion-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .passion-card h3 {
+            font-size: 1.25rem;
+            color: hsl(195, 92%, 58%);
+            margin-bottom: 0.75rem;
+        }
+
+        .passion-card p {
+            color: hsl(210, 20%, 70%);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 5rem;
+            padding: 3rem 0;
+            border-top: 1px solid hsl(220, 15%, 25%);
+            text-align: center;
+            animation: fade-in 1s ease-out 0.8s both;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-link {
+            color: hsl(210, 20%, 70%);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, hsl(195, 92%, 58%), hsl(240, 48%, 48%));
+            transition: width 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: hsl(195, 92%, 58%);
+        }
+
+        .footer-link:hover::after {
+            width: 100%;
+        }
+
+        .footer-location {
+            color: hsl(210, 20%, 70%);
+            font-size: 0.9rem;
+        }
+
+        .footer-copyright {
+            color: hsl(210, 20%, 60%);
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        /* Animations */
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slide-up {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .passions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 2rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.25rem;
+            }
+
+            .hero-button {
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .card h2 {
+                font-size: 1.5rem;
+            }
+
+            .skills-section h2,
+            .passions-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .bg-orb-1,
+            .bg-orb-2 {
+                width: 300px;
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background Elements -->
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <header class="hero">
+            <div class="hero-content">
+                <h1>Hmidi Amine</h1>
+                <p class="subtitle">We Can Do It! 💪</p>
+            </div>
+            <div class="hero-button">
+                <button class="btn" onclick="scrollToProjects()">View My Projects</button>
+            </div>
+        </header>
+
+        <!-- About & Goal Cards -->
+        <div class="card-grid">
+            <div class="card">
+                <h2>About Me</h2>
+                <p>
+                    Industrial IT Engineer with a gift for programming. Manager and owner of <span class="highlight">NEOLOGIC</span> since 2019, specializing in creating innovative computer solutions for professional and industrial challenges.
+                </p>
+                <p>
+                    With extensive experience in business management software, web applications, and mobile development, I excel at transforming real-world problems into elegant digital solutions.
+                </p>
+            </div>
+
+            <div class="card">
+                <h2>My Goal</h2>
+                <p>
+                    As a passionate frontend developer, I am determined to join one of the <span class="highlight">biggest international IT companies</span> where I can contribute to cutting-edge projects that impact millions of users worldwide.
+                </p>
+                <p>
+                    I bring creativity, technical expertise, and a proven track record of delivering high-quality solutions that solve real business problems.
+                </p>
+            </div>
+        </div>
+
+        <!-- Technical Skills -->
+        <section class="skills-section">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-tag">C#</div>
+                <div class="skill-tag">VB.NET</div>
+                <div class="skill-tag">ASP.NET</div>
+                <div class="skill-tag">HTML</div>
+                <div class="skill-tag">CSS</div>
+                <div class="skill-tag">JavaScript</div>
+                <div class="skill-tag">jQuery</div>
+                <div class="skill-tag">SQL Server</div>
+                <div class="skill-tag">MySQL</div>
+                <div class="skill-tag">React</div>
+                <div class="skill-tag">TypeScript</div>
+            </div>
+        </section>
+
+        <!-- My Passions -->
+        <section class="passions-section">
+            <h2>My Passions</h2>
+            <div class="passions-grid">
+                <div class="passion-card">
+                    <div class="passion-icon">🧩</div>
+                    <h3>Problem Solving</h3>
+                    <p>Transforming real industrial problems into computing solutions</p>
+                </div>
+                <div class="passion-card">
+                    <div class="passion-icon">🚀</div>
+                    <h3>Innovation</h3>
+                    <p>Creating software, web, and mobile applications</p>
+                </div>
+                <div class="passion-card">
+                    <div class="passion-icon">⚽</div>
+                    <h3>Sports</h3>
+                    <p>Beach volleyball, swimming, and football enthusiast</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#" class="footer-link">LinkedIn</a>
+                    <a href="#" class="footer-link">GitHub</a>
+                    <a href="#" class="footer-link">Email</a>
+                    <a href="#" class="footer-link">Portfolio</a>
+                </div>
+                <p class="footer-location">
+                    Based in Monastir, Tunisia 🇹🇳 | Ready to make an impact globally 🌍
+                </p>
+                <p class="footer-copyright">
+                    © 2025 Hmidi Amine. All rights reserved.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function scrollToProjects() {
+            alert('Projects section coming soon! This button can be linked to your portfolio or GitHub.');
+        }
+    </script>
+</body>
+</html>
