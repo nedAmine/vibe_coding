@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Composant de tarification réutilisable</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .pricing-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            max-width: 1200px;
+        }
+
+        .pricing-card {
+            width: 320px;
+            background-color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: left;
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .popular-badge {
+            background: #e74c3c;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .price {
+            font-size: 28px;
+            color: #27ae60;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .features {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 25px;
+        }
+
+        .features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .features li:before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .features li:last-child {
+            border-bottom: none;
+        }
+
+        .btn {
+            background: #3498db;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            margin-top: 10px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+
+        .btn-premium {
+            background: #e67e22;
+        }
+
+        .btn-premium:hover {
+            background: #d35400;
+        }
+    </style>
+</head>
+<body>
+    <div class="pricing-container" id="pricingContainer">
+        <!-- Les cartes seront générées ici par JavaScript -->
+    </div>
+
+    <script>
+        // Fonction pour créer une carte de tarification
+        function createPricingCard(options) {
+            // Options par défaut
+            const defaults = {
+                title: 'Basic Plan',
+                price: '$9.99',
+                period: '/month',
+                features: ['1 GB Storage', 'Basic Support', 'All Core Features'],
+                buttonText: 'Start Trial',
+                popular: false,
+                buttonClass: ''
+            };
+
+            // Fusion des options fournies avec les valeurs par défaut
+            const config = { ...defaults, ...options };
+
+            // Création de l'élément de carte
+            const card = document.createElement('div');
+            card.className = 'pricing-card';
+
+            // Construction du contenu HTML
+            let html = '';
+
+            // Ajout du badge "Populaire" si nécessaire
+            if (config.popular) {
+                html += `<div class="popular-badge">Le plus populaire</div>`;
+            }
+
+            html += `
+                <h2 class="title">${config.title}</h2>
+                <p class="price">${config.price} <span style="font-size: 16px; color: #7f8c8d;">${config.period}</span></p>
+                <ul class="features">
+            `;
+
+            // Ajout des fonctionnalités
+            config.features.forEach(feature => {
+                html += `<li>${feature}</li>`;
+            });
+
+            // Détermination de la classe du bouton
+            const buttonClass = config.buttonClass ? `btn ${config.buttonClass}` : 'btn';
+
+            html += `
+                </ul>
+                <button class="${buttonClass}">${config.buttonText}</button>
+            `;
+
+            card.innerHTML = html;
+
+            // Ajout d'un gestionnaire d'événement pour le bouton
+            const button = card.querySelector('.btn');
+            button.addEventListener('click', function() {
+                alert(`Vous avez sélectionné le plan: ${config.title}`);
+            });
+
+            return card;
+        }
+
+        // Fonction pour initialiser plusieurs cartes
+        function initPricingCards(containerId, cardsConfig) {
+            const container = document.getElementById(containerId);
+            
+            cardsConfig.forEach(config => {
+                const card = createPricingCard(config);
+                container.appendChild(card);
+            });
+        }
+
+        // Configuration des cartes de tarification
+        const pricingCardsConfig = [
+            {
+                title: 'Basic Plan',
+                price: '$9.99',
+                period: '/month',
+                features: ['1 GB Storage', 'Basic Support', 'All Core Features', 'Email Assistance'],
+                buttonText: 'Start Trial',
+                popular: false
+            },
+            {
+                title: 'Professional Plan',
+                price: '$19.99',
+                period: '/month',
+                features: ['10 GB Storage', 'Priority Support', 'All Core Features', 'Email & Phone Assistance', 'Advanced Analytics'],
+                buttonText: 'Get Started',
+                popular: true,
+                buttonClass: 'btn-premium'
+            },
+            {
+                title: 'Enterprise Plan',
+                price: '$49.99',
+                period: '/month',
+                features: ['Unlimited Storage', '24/7 Support', 'All Core Features', 'Dedicated Account Manager', 'Custom Integrations', 'API Access'],
+                buttonText: 'Contact Sales',
+                popular: false,
+                buttonClass: 'btn-secondary'
+            }
+        ];
+
+        // Initialisation des cartes lorsque la page est chargée
+        document.addEventListener('DOMContentLoaded', function() {
+            initPricingCards('pricingContainer', pricingCardsConfig);
+        });
+
+        // Exemple d'utilisation pour ajouter une carte supplémentaire
+        // const newCard = createPricingCard({
+        //     title: 'Custom Plan',
+        //     price: '$29.99',
+        //     period: '/month',
+        //     features: ['5 GB Storage', 'Standard Support', 'Core Features', 'Basic Analytics'],
+        //     buttonText: 'Choose Plan'
+        // });
+        // document.getElementById('pricingContainer').appendChild(newCard);
+    </script>
+</body>
+</html>
